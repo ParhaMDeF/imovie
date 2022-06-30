@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:imovie/widgets/MovieInfoPage/movie_info_card.dart';
+import 'package:imovie/veiw/widgets/MovieInfoPage/movie_info_card.dart';
 
 class MovieInfoPage extends StatelessWidget {
   final String imageUrl, movieName, genre, year;

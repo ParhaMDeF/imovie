@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
-import 'package:imovie/pages/MovieInfoPage.dart';
+import 'package:imovie/veiw/pages/MovieInfoPage.dart';
 
 class MovieCard extends StatelessWidget {
   final String movieName, genre, imageUrl, year;
@@ -37,6 +37,7 @@ class MovieCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     child: CachedNetworkImage(
                       imageUrl: imageUrl,
+                      width: 100,
                       fit: BoxFit.fill,
                     )),
               ),

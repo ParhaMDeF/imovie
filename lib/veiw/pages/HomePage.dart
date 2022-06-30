@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:imovie/Api%20Service/networking.dart';
-import 'package:imovie/models/searchResultModel.dart';
-import 'package:imovie/widgets/movie_card.dart';
+import 'package:imovie/veiw/widgets/movie_card.dart';
+import 'package:imovie/view_model/home_page_view_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var future;
-  var networkService = Get.put(Networking());
+  var viewModel = Get.put(HomePageViewModel());
   String query = "";
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                               size: 22, color: Theme.of(context).primaryColor),
                           onPressed: () {
                             setState(() {
-                              future = networkService.searchMovies(query);
+                              future = viewModel.searchMovie(query);
                             });
                           },
                         )),
@@ -51,8 +50,8 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 30),
                 FutureBuilder(
                   future: future,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<SearchResultModel> snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SizedBox(
                         height: Get.height * 0.6,
