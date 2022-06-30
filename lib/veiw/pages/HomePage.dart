@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:imovie/veiw/widgets/movie_card.dart';
+import 'package:imovie/veiw/widgets/HomaPage/loading_widget.dart';
+import 'package:imovie/veiw/widgets/HomaPage/movie_card.dart';
 import 'package:imovie/view_model/home_page_view_model.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,20 @@ class _HomePageState extends State<HomePage> {
   var future;
   var viewModel = Get.put(HomePageViewModel());
   String query = "";
+  Timer? searchOnStoppedTyping;
+
+  void onChangeHandler(value) {
+    const duration = Duration(milliseconds: 800);
+    if (searchOnStoppedTyping != null) {
+      searchOnStoppedTyping?.cancel();
+    }
+    searchOnStoppedTyping = Timer(duration, () {
+      setState(() {
+        future = viewModel.searchMovie(value);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,12 +43,28 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   decoration: BoxDecoration(
                       color: const Color(0xFFFFFFFF),
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 0),
+                            color: Colors.grey.shade200,
+                            spreadRadius: 0.7,
+                            blurRadius: 20),
+                        BoxShadow(
+                            offset: Offset(0, 5),
+                            color: Colors.grey.shade200,
+                            spreadRadius: 0.7,
+                            blurRadius: 20),
+                      ]),
                   child: TextField(
-                    onChanged: (value) => query = value,
+                    onChanged: (value) {
+                      query = value;
+                      onChangeHandler(value);
+                    },
                     cursorColor: Theme.of(context).primaryColor,
                     style: TextStyle(color: Theme.of(context).primaryColor),
                     decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(top: 15),
                         border: InputBorder.none,
                         prefixIcon: IconButton(
                           padding: EdgeInsets.zero,
@@ -53,17 +84,13 @@ class _HomePageState extends State<HomePage> {
                   builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SizedBox(
-                        height: Get.height * 0.6,
-                        child: LoadingAnimationWidget.threeArchedCircle(
-                            color: Theme.of(context).primaryColor, size: 40),
-                      );
+                      return const LoadingWidget();
                     } else if (snapshot.connectionState ==
                         ConnectionState.done) {
                       if (snapshot.hasData) {
                         if (snapshot.data!.response == "False") {
                           return SizedBox(
-                              height: Get.height * 0.6,
+                              height: Get.height * 0.65,
                               child: Center(
                                 child: Text('Nothing found!',
                                     style:

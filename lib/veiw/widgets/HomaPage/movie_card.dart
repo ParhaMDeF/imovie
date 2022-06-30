@@ -48,6 +48,7 @@ class MovieCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(movieName,
+                          maxLines: 2,
                           overflow: TextOverflow.fade,
                           style: Theme.of(context).textTheme.headline2),
                       const SizedBox(height: 10),

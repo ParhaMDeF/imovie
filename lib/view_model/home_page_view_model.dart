@@ -19,4 +19,5 @@ class HomePageViewModel extends GetxController {
     });
     return resultData;
   }
+  
 }

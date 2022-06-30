@@ -35,6 +35,7 @@ class MovieInfoCard extends StatelessWidget {
                     Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
                       Flexible(
                           child: Text(movieName,
+                          maxLines: 2,
                               overflow: TextOverflow.fade,
                               style: const TextStyle(
                                   fontSize: 22,
