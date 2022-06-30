@@ -22,7 +22,7 @@ class RatingWidget extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             title,
-            style: const TextStyle(fontSize: 14, color: Colors.grey),
+            style: const TextStyle(fontSize: 14, color: Colors.white70),
           ),
         ],
       ),

@@ -28,7 +28,7 @@ class MovieInfoCard extends StatelessWidget {
               filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
               child: Container(
                 padding: const EdgeInsets.all(15),
-                color: Colors.grey.shade200.withOpacity(0.1),
+                color: Colors.grey.shade200.withOpacity(0.3),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -42,13 +42,13 @@ class MovieInfoCard extends StatelessWidget {
                                   fontWeight: FontWeight.bold))),
                       const SizedBox(width: 8),
                       Text(year,
-                          style:
-                              const TextStyle(fontSize: 14, color: Colors.grey))
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.white70))
                     ]),
                     const SizedBox(height: 10),
                     Text(genre,
-                        style:
-                            const TextStyle(fontSize: 18, color: Colors.grey)),
+                        style: const TextStyle(
+                            fontSize: 18, color: Colors.white70)),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
